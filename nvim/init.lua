@@ -1,0 +1,5 @@
+require("configs")
+require("configs/keymaps")
+require("addons/statusline")
+require("addons/autocmd")
+require("plugins/git")
