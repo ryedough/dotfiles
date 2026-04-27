@@ -2,10 +2,7 @@ vim.pack.add({
     "https://github.com/lewis6991/gitsigns.nvim"
 })
 
-local function packadd(name)
-    vim.cmd("packadd " .. name)
-end
-packadd("gitsigns.nvim")
+vim.cmd("packadd gitsigns.nvim")
 
 require("gitsigns").setup({
 	signs = {
