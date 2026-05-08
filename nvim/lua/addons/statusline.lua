@@ -157,12 +157,13 @@ local function setup_dynamic_statusline()
     vim.api.nvim_set_hl(0, "StatusLine", {bg = secondary, fg=primary})
     vim.api.nvim_set_hl(0, "StatusLineDiv2", {bg = tertiary, fg=secondary})
     vim.api.nvim_set_hl(0, "StatusLineFile", {bg = tertiary, fg=primary})
+    vim.api.nvim_set_hl(0, "StatusLineRight", {bg = secondary, fg=primary})
 
-	vim.api.nvim_create_autocmd({ "WinLeave", "BufLeave" }, {
-		callback = function()
-			vim.opt_local.statusline = "  %f %h%m%r \u{e0b1} %{v:lua.file_type()} %=  %l:%c   %P "
-		end,
-	})
+	-- vim.api.nvim_create_autocmd({ "WinLeave", "BufLeave" }, {
+	-- 	callback = function()
+	-- 		vim.opt_local.statusline = "  %f %h%m%r \u{e0b1} %{v:lua.file_type()} %=  %l:%c   %P "
+	-- 	end,
+	-- })
 end
 
 setup_dynamic_statusline()

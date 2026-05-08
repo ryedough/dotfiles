@@ -23,6 +23,7 @@ local function set_transparent() -- set UI component to transparent
 end
 
 set_transparent()
+-- vim.o.laststatus=3
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.cursorline = true
