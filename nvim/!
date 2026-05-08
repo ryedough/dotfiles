@@ -19,6 +19,12 @@ vim.keymap.set("n", "N", "Nzzzv", { desc = "Previous search result (centered)" }
 -- LSP ---------------------
 vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "get symbol docs"})
 --- Addon Keybinds ---------
+vim.keymap.set("c", "w!!", function () require('addons.sudo_write').sudo_write() end)
+vim.keymap.set("c", "wq!!", function ()
+    require('addons.sudo_write').sudo_write()
+    vim.cmd('q')
+end)
+
 ----------------------------
 vim.keymap.set("x", "<leader>p", '"_dP', { desc = "Paste without yanking" })
 vim.keymap.set({ "n", "v" }, "<leader>x", '"_d', { desc = "Delete without yanking" })
@@ -29,6 +35,8 @@ vim.keymap.set("n", "<leader>bh", ":bprevious<CR>", { desc = "Previous buffer" }
 vim.keymap.set("n", "<C-j>", "<C-d>zz", { desc = "Half page down (centered)" })
 vim.keymap.set("n", "<C-k>", "<C-u>zz", { desc = "Half page up (centered)" })
 
+vim.keymap.set("n", "<leader>sv", ":vsplit<CR>", { desc = "Split window vertically" })
+vim.keymap.set("n", "<leader>sh", ":split<CR>", { desc = "Split window horizontally" })
 vim.keymap.set("n", "<C-Up>", ":resize +2<CR>", { desc = "Increase window height" })
 vim.keymap.set("n", "<C-Down>", ":resize -2<CR>", { desc = "Decrease window height" })
 vim.keymap.set("n", "<C-Left>", ":vertical resize -2<CR>", { desc = "Decrease window width" })
