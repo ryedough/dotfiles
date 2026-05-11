@@ -46,9 +46,8 @@ vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines and keep cursor position"
 
 vim.keymap.set("n", "<leader>pa", function() -- show file path
 	local path = vim.fn.expand("%:p")
-	vim.fn.setreg("+", path)
 	print("file:", path)
-end, { desc = "Copy full file path" })
+end, { desc = "Show full file path" })
 
 vim.keymap.set("n", "<leader>td", function()
 	vim.diagnostic.enable(not vim.diagnostic.is_enabled())

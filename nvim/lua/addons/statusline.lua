@@ -1,20 +1,15 @@
--- Git branch function with caching and Nerd Font icon
-local cached_branch = ""
-local last_check = 0
-local function git_branch()
-	local now = vim.loop.now()
-	if now - last_check > 5000 then -- Check every 5 seconds
-		cached_branch = vim.fn.system("git branch --show-current 2>/dev/null | tr -d '\n'")
-		last_check = now
-	end
-	if cached_branch ~= "" then
-		return " \u{e725} " .. cached_branch .. " " -- nf-dev-git_branch
-	end
-	return ""
+---@return string
+function _G.git_component()
+    local head = vim.b.gitsigns_head
+    if not head then
+        return ''
+    end
+
+    return string.format(' %s ', head)
 end
 
 -- File type with Nerd Font icon
-local function file_type()
+function _G.file_type_component()
 	local ft = vim.bo.filetype
 	local icons = {
 		lua = "\u{e620} ", -- nf-dev-lua
@@ -64,7 +59,7 @@ local function file_type()
 end
 
 -- Mode indicators with Nerd Font icons
-local function mode_icon()
+function _G.mode_icon_component()
 	local mode = vim.fn.mode()
 	local modes = {
 		n = " \u{f121}  NORMAL",
@@ -84,7 +79,7 @@ local function mode_icon()
 	return modes[mode] or (" \u{f059} " .. mode)
 end
 
-local function diagnostic_status()
+function _G.diagnostic_status_component()
   local ok = '   '
 
   local ignore = {
@@ -112,35 +107,26 @@ local function diagnostic_status()
   return ok
 end
 
-_G.mode_icon = mode_icon
-_G.git_branch = git_branch
-_G.file_type = file_type
-_G.diagnostic_status = diagnostic_status
-
-vim.cmd([[
-  highlight StatusLineBold gui=bold cterm=bold
-]])
-
 -- Function to change statusline based on window focus
-local function setup_dynamic_statusline()
+local function render()
 	vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter" }, {
 		callback = function()
 			vim.opt_local.statusline = table.concat({
 				"%#StatusLineBold#",
                 " ",
-				"%{v:lua.mode_icon()}",
+				"%{v:lua.mode_icon_component()}",
                 " ",
                 "%#StatusLineDiv1#",
                 "\u{e0b8} ",
 				"%#StatusLine#",
-				" %f %h%m%r", -- nf-pl-left_hard_divider
-				"%{v:lua.git_branch()}",
+				"%t ",
+				"%{v:lua.git_component()}",
                 "%#StatusLineDiv2#",
 				"\u{e0b8} ", -- nf-pl-left_hard_divider
                 "%#StatusLineFile#",
-				"%{v:lua.file_type()}",
+				"%{v:lua.file_type_component()}",
 				"%=", -- Right-align everything after this
-                "%{v:lua.diagnostic_status()}",
+                "%{v:lua.diagnostic_status_component()}",
                 "%#StatusLineRight#",
 				" %l:%c / %L ", -- nf-fa-clock_o for line/col
 			})
@@ -166,4 +152,4 @@ local function setup_dynamic_statusline()
 	-- })
 end
 
-setup_dynamic_statusline()
+render()

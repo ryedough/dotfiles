@@ -1,27 +1,28 @@
 vim.pack.add({
-    "https://www.github.com/nvim-tree/nvim-tree.lua",
+    "https://github.com/stevearc/oil.nvim"
 })
 
-vim.cmd"packadd nvim-tree.lua"
+vim.cmd"packadd oil.nvim"
 
-require("nvim-tree").setup({
-	view = {
-		width = 35,
-	},
-	filters = {
-		dotfiles = false,
-	},
-	renderer = {
-		group_empty = true,
-	},
+function _G.get_oil_winbar()
+  local bufnr = vim.api.nvim_win_get_buf(vim.g.statusline_winid)
+  local dir = require("oil").get_current_dir(bufnr)
+  if dir then
+    return vim.fn.fnamemodify(dir, ":~")
+  else
+    -- If there is no current directory (e.g. over ssh), just show the buffer name
+    return vim.api.nvim_buf_get_name(0)
+  end
+end
+
+require("oil").setup({
+    keymaps = {
+        ["q"] = {"actions.close", mode = "n"},
+    },
+    win_options = {
+        winbar = "%!v:lua.get_oil_winbar()",
+    },
+    delete_to_trash = true,
 })
-vim.keymap.set("n", "<leader>e", function()
-	require("nvim-tree.api").tree.toggle()
-end, { desc = "Toggle NvimTree" })
 
-vim.api.nvim_set_hl(0, "NvimTreeNormalNC", { bg = "none" })
-vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
-vim.api.nvim_set_hl(0, "NvimTreeSignColumn", { bg = "none" })
-vim.api.nvim_set_hl(0, "NvimTreeNormal", { bg = "none" })
-vim.api.nvim_set_hl(0, "NvimTreeWinSeparator", { fg = "#2a2a2a", bg = "none" })
-vim.api.nvim_set_hl(0, "NvimTreeEndOfBuffer", { bg = "none" })
+vim.keymap.set("n", "<leader>e", require("oil").open, { desc = "Open Explorer" })

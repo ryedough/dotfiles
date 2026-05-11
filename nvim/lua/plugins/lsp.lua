@@ -32,6 +32,9 @@ do
 	local shfmt = require("efmls-configs.formatters.shfmt")
 
 	local cpplint = require("efmls-configs.linters.cpplint")
+    cpplint = vim.tbl_extend('force', cpplint, {
+       lintCommand ='/home/taufiq/.local/share/nvim/mason/bin/cpplint --filter=-whitespace,-legal/copyright "${INPUT}"'
+    })
 	local clangfmt = require("efmls-configs.formatters.clang_format")
 
 	local go_revive = require("efmls-configs.linters.go_revive")
