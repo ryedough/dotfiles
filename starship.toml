@@ -4,11 +4,11 @@ palette = 'main'
 
 format = """
 [](fg:#394260)\
-[](bg:#059669 fg:#394260)\
-[](bg:#059669 fg:primary)\
+[](bg:primary_bg fg:#394260)\
+[](bg:primary_bg fg:primary)\
 $directory\
-[](fg:primary bg:#059669)\
-[](fg:#059669 bg:#394260)\
+[](fg:primary bg:primary_bg)\
+[](fg:primary_bg bg:#394260)\
 $git_branch\
 $git_status\
 [](fg:#394260 bg:#212736)\
@@ -35,6 +35,9 @@ truncation_symbol = "…/"
 "Downloads" = " "
 "Music" = " "
 "Pictures" = " "
+"Programming" = "  "
+"Games" = "  "
+"Studies" = "  "
 
 [git_branch]
 symbol = ""
@@ -70,4 +73,5 @@ min_time = 500
 format = '[  $duration ](fg:#a0a9cb bg:#1d2230)'
 
 [palettes.main]
-primary = "#34d399" 
+primary="#00FF26"
+primary_bg="#03BF2C"

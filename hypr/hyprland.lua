@@ -28,12 +28,19 @@ hl.monitor({
 
 -- Set programs that you use
 Terminal    = "foot"
-FileManager = "dolphin"
+FileManager = "yazi"
 Menu        = "hyprlauncher"
 
 ---- Run Requires
 
 require'keybinds'
+
+---- Set XWayland
+hl.config({
+    xwayland = {
+        force_zero_scaling = true
+    }
+})
 
 -------------------
 ---- AUTOSTART ----
@@ -44,11 +51,10 @@ require'keybinds'
 -- Autostart necessary processes (like notifications daemons, status bars, etc.)
 -- Or execute your favorite apps at launch like this:
 --
--- hl.on("hyprland.start", function () 
---   hl.exec_cmd(Terminal)
---   hl.exec_cmd("nm-applet")
---   hl.exec_cmd("waybar & hyprpaper & firefox")
--- end)
+hl.on("hyprland.start", function ()
+  hl.exec_cmd('exec dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY &')
+  hl.exec_cmd('hyprpaper')
+end)
 
 
 -------------------------------
@@ -59,6 +65,7 @@ require'keybinds'
 
 hl.env("XCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_SIZE", "24")
+hl.env("MOZ_ENABLE_WAYLAND", "1")
 
 -----------------------
 ---- LOOK AND FEEL ----
@@ -70,10 +77,10 @@ hl.config({
         gaps_in  = 5,
         gaps_out = 10,
 
-        border_size = 2,
+        border_size = 3,
 
         col = {
-            active_border   = { colors = {"rgba(10b981ee)", "rgba(965fd4ee)"}, angle = 45 },
+            active_border   = { colors = {"rgba(00FF26ee)", "rgba(00FFFFee)"}, angle = 45 },
             inactive_border = "rgba(595959aa)",
         },
 
@@ -102,9 +109,9 @@ hl.config({
         },
 
         blur = {
-            enabled   = true,
+            enabled   = false,
             size      = 4,
-            passes    = 2,
+            passes    = 1,
             vibrancy  = 0.1696,
         },
     },
@@ -206,9 +213,6 @@ hl.config({
 
         sensitivity = 0, -- -1.0 - 1.0, 0 means no modification.
 
-        touchpad = {
-            natural_scroll = false,
-        },
     },
 })
 
@@ -277,7 +281,19 @@ hl.window_rule({
 
 hl.window_rule({
     match={
-        class="?!(foot)",
+        class="foot",
     },
-    no_blur = true,
+})
+
+hl.window_rule({
+    match={
+        class="firefox"
+    }
+})
+
+hl.window_rule({
+    match={
+        class="blender"
+    },
+    no_blur=true
 })
