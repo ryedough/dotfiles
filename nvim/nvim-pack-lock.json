@@ -42,8 +42,8 @@
       "src": "https://www.github.com/nvim-tree/nvim-tree.lua"
     },
     "obsidian.nvim": {
-      "rev": "726b60c89f4bafef267a714ea1faa1335bdd414a",
-      "src": "https://github.com/epwalsh/obsidian.nvim"
+      "rev": "c9c2bcb3bc03b3b3e264e58d43289d8f8c2ee798",
+      "src": "https://github.com/obsidian-nvim/obsidian.nvim"
     },
     "oil.nvim": {
       "rev": "0fcc83805ad11cf714a949c98c605ed717e0b83e",

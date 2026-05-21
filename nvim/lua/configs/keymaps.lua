@@ -16,6 +16,13 @@ vim.keymap.set("n", "<leader>c", ":nohlsearch<CR>", { desc = "Clear search highl
 vim.keymap.set("n", "n", "nzzzv", { desc = "Next search result (centered)" })
 vim.keymap.set("n", "N", "Nzzzv", { desc = "Previous search result (centered)" })
 
+---- Surround ----
+vim.keymap.set("v", "<leader>s(", "c()<Esc>hp", {desc = "Surround selection with ()"})
+vim.keymap.set("v", "<leader>s{", "c{}<Esc>hp", {desc = "Surround selection with {}"})
+vim.keymap.set("v", '<leader>s"', 'c""<Esc>hp', {desc = "Surround selection with {}"})
+vim.keymap.set("v", "<leader>s'", 'c""<Esc>hp', {desc = "Surround selection with {}"})
+vim.keymap.set("v", '<leader>s`', 'c``<Esc>hp', {desc = "Surround selection with {}"})
+
 -- LSP ---------------------
 vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "get symbol docs"})
 --- Addon Keybinds ---------
@@ -39,8 +46,8 @@ vim.keymap.set("n", "<A-k>", ":m .-2<CR>==", { desc = "Move line up" })
 vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
 vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
 
-vim.keymap.set("v", "<", "<gv", { desc = "Indent left and reselect" })
-vim.keymap.set("v", ">", ">gv", { desc = "Indent right and reselect" })
+vim.keymap.set("v", "<A-h>", "<gv", { desc = "Indent left and reselect" })
+vim.keymap.set("v", "<A-l>", ">gv", { desc = "Indent right and reselect" })
 
 vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines and keep cursor position" })
 

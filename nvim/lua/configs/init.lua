@@ -28,8 +28,17 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.cursorline = true
 vim.opt.wrap = false
-vim.opt.scrolloff = 10
 vim.opt.sidescrolloff = 10
+
+-- keep cursor centered
+vim.api.nvim_create_autocmd({"CursorMovedI", "CursorMoved"}, {
+  pattern = "*",
+  callback = function()
+    local pos = vim.fn.getpos(".")
+    vim.cmd("normal! zz")
+    vim.fn.setpos(".", pos)
+  end,
+})
 
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
@@ -52,8 +61,8 @@ vim.opt.showmode = false
 vim.opt.pumheight = 10
 vim.opt.pumblend = 10
 vim.opt.winblend = 0
-vim.opt.conceallevel = 0
-vim.opt.concealcursor = ""
+vim.opt.conceallevel = 2
+-- vim.opt.concealcursor = ""
 vim.opt.lazyredraw = true
 vim.opt.synmaxcol = 300
 vim.opt.fillchars = { eob = " " }
@@ -67,7 +76,7 @@ end
 
 vim.opt.backup = false
 vim.opt.writebackup = false
-vim.opt.swapfile = false
+vim.opt.swapfile = true
 vim.opt.undofile = true
 vim.opt.undodir = undodir
 vim.opt.updatetime = 300
@@ -91,7 +100,7 @@ vim.opt.guicursor =
 	"n-v-c:block,i-ci-ve:block,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175" -- cursor blinking and settings
 
 vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()" 
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldlevel = 99
 
 vim.opt.splitbelow = true

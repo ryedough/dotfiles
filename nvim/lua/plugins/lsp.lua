@@ -226,11 +226,36 @@ require("blink.cmp").setup({
 	},
 	appearance = { nerd_font_variant = "mono" },
 	completion = { menu = { auto_show = true } },
-	sources = { default = { "lsp", "path", "buffer", "snippets" } },
-	snippets = {
-		expand = function(snippet)
-			require("luasnip").lsp_expand(snippet)
-		end,
+    signature = { enabled = true },
+    snippets = { preset = "luasnip" },
+    sources = {
+        default = {
+            "snippets",
+            "lsp",
+            "path",
+            "buffer",
+            -- "cmp_r"
+        },
+        providers = {
+            path = {
+                opts = {
+                    -- Always use the CWD rather than the current
+                    -- buffer's parent directory
+                    get_cwd = function(_)
+                        return vim.fn.getcwd()
+                    end,
+                    show_hidden_files_by_default = true,
+                    trailing_slash = false,
+                },
+            },
+        },
+        -- providers = {
+        --     cmp_r = {
+        --         name = "cmp_r",
+        --         module = "blink.compat.source",
+        --         opts = {}
+        --     }
+        -- }
 	},
 
 	fuzzy = {
