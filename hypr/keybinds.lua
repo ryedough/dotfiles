@@ -1,5 +1,11 @@
 local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 
+local function bind_multiple(arr, func, opts)
+    for _, key in pairs(arr) do
+       hl.bind(key, func, opts)
+    end
+end
+
 -- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
 hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(Terminal))
 hl.bind(mainMod .. " + Q", hl.dsp.window.close())
@@ -12,11 +18,23 @@ hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
 
 hl.bind(mainMod .. " + F", hl.dsp.exec_cmd("firefox"))
 
--- Move focus with mainMod + arrow keys
-hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))
-hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
-hl.bind(mainMod .. " + up",    hl.dsp.focus({ direction = "up" }))
-hl.bind(mainMod .. " + down",  hl.dsp.focus({ direction = "down" }))
+-- Move focus
+bind_multiple({
+    mainMod .. " + up",
+    mainMod .. " + SHIFT + K",
+},hl.dsp.focus({direction = "up"}))
+bind_multiple({
+    mainMod .. " + right",
+    mainMod .. " + SHIFT + L",
+},hl.dsp.focus({direction = "right"}))
+bind_multiple({
+    mainMod .. " + down",
+    mainMod .. " + SHIFT + J",
+},hl.dsp.focus({direction = "down"}))
+bind_multiple({
+    mainMod .. " + left",
+    mainMod .. " + SHIFT + H",
+},hl.dsp.focus({direction = "left"}))
 
 -- Switch workspaces with mainMod + [0-9]
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
@@ -26,9 +44,8 @@ for i = 1, 10 do
     hl.bind(mainMod .. " + SHIFT + " .. key,     hl.dsp.window.move({ workspace = i }))
 end
 
--- Example special workspace (scratchpad)
-hl.bind(mainMod .. " + S",         hl.dsp.workspace.toggle_special("magic"))
-hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }))
+hl.bind(mainMod .. " + grave",         hl.dsp.workspace.toggle_special("cockpit"))
+hl.bind(mainMod .. " + SHIFT + grave", hl.dsp.window.move({ workspace = "special:cockpit" }))
 
 -- Scroll through existing workspaces with mainMod + scroll
 hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
@@ -43,25 +60,10 @@ hl.device({
 
 -- pass binds to apps
 
-hl.bind(mainMod .. " + n", hl.dsp.submap("vim-navigation"))
-hl.define_submap("vim-navigation", function ()
-    hl.bind(mainMod .. " + k", hl.dsp.send_shortcut({mods="", key="up", window="activewindow"}), {repeating = true})
-    hl.bind(mainMod .. " + l", hl.dsp.send_shortcut({mods="", key="right", window="activewindow"}), {repeating = true})
-    hl.bind(mainMod .. " + j", hl.dsp.send_shortcut({mods="", key="down", window="activewindow"}), {repeating = true})
-    hl.bind(mainMod .. " + h", hl.dsp.send_shortcut({mods="", key="left", window="activewindow"}), {repeating = true})
-    hl.bind("escape", hl.dsp.submap(("reset")))
-end)
-
 -- Resize and move window
 
 hl.bind(mainMod .. " + SHIFT + W", hl.dsp.submap("resize-window"))
 hl.bind(mainMod .. " + W", hl.dsp.submap("move-window"))
-
-local function bind_multiple(arr, func, opts)
-    for _, key in pairs(arr) do
-       hl.bind(key, func, opts)
-    end
-end
 
 hl.define_submap("move-window", function ()
     bind_multiple({"up", "k"}, hl.dsp.window.swap({direction = "u"}))
