@@ -6,12 +6,12 @@ vim.pack.add({
 vim.cmd("packadd plenary.nvim")
 vim.cmd("packadd obsidian.nvim")
 
-require("obsidian").setup({
-    legacy_commands = false,
-    workspaces = {
-        {
-            name = "personal",
-            path = "~/Studies/obsidian_vault/personal"
-        }
-    }
-})
+-- require("obsidian").setup({
+--     legacy_commands = false,
+--     workspaces = {
+--         {
+--             name = "personal",
+--             path = "~/Studies/obsidian_vault/"
+--         }
+--     }
+-- })
