@@ -1,9 +1,6 @@
 $include /etc/inputrc
 set completion-ignore-case On
 
-CLEARFORE="\[\e[0m\]"
-
-VICOLOR="\e[38;2;00;255;26]"
 set show-mode-in-prompt on
 set keyseq-timeout 10
 set vi-ins-mode-string "\e[38;2;0;255;26m \e[0m"
