@@ -7,12 +7,14 @@ vim.pack.add({
         version = vim.version.range("1.*"),
     },
     { src = "https://github.com/L3MON4D3/LuaSnip" },
+    { src = "https://github.com/rafamadriz/friendly-snippets"},
 })
 
 vim.cmd("packadd nvim-lspconfig")
 vim.cmd("packadd mason.nvim")
 vim.cmd("packadd blink.cmp")
 vim.cmd("packadd LuaSnip")
+vim.cmd("packadd friendly-snippets")
 
 require'mason'.setup{}
 
@@ -214,6 +216,8 @@ vim.keymap.set("n", "<leader>q", function()
 end, { desc = "Open diagnostic list" })
 vim.keymap.set("n", "<leader>dl", vim.diagnostic.open_float, { desc = "Show line diagnostics" })
 
+require("luasnip").filetype_extend("go", {"all"})
+
 require("blink.cmp").setup({
 	keymap = {
 		preset = "none",
@@ -268,4 +272,4 @@ vim.lsp.config["*"] = {
 	capabilities = require("blink.cmp").get_lsp_capabilities(),
 }
 
-vim.lsp.enable({"efm", "ts_ls","lua_ls", "pyright", "clangd", "rust_analyzer"})
+vim.lsp.enable({"efm", "ts_ls","lua_ls", "pyright", "clangd", "rust_analyzer", "gopls"})

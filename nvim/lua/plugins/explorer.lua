@@ -19,6 +19,9 @@ require("oil").setup({
     keymaps = {
         ["q"] = {"actions.close", mode = "n"},
     },
+    view_options = {
+        show_hidden = true,
+    },
     win_options = {
         winbar = "%!v:lua.get_oil_winbar()",
     },
