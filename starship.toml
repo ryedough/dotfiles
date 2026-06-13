@@ -39,6 +39,7 @@ truncation_symbol = "…/"
 "Games" = "  "
 "Studies" = "  "
 "Projects" = " "
+"Applications" = "󰀻 "
 
 [git_branch]
 symbol = ""

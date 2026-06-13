@@ -66,6 +66,9 @@ end)
 hl.env("XCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_SIZE", "24")
 hl.env("MOZ_ENABLE_WAYLAND", "1")
+hl.env("GDK_SCALE", "1.25")
+hl.env("QT_SCALE_FACTOR", "1.25")
+hl.env("QT_AUTO_SCREEN_SCALE_FACTOR", "1")
 
 -----------------------
 ---- LOOK AND FEEL ----
@@ -297,5 +300,13 @@ hl.window_rule({
         initial_title="File Browser",
     },
     size = {"monitor_w * 0.5", "monitor_h * 0.5"},
+    center = true,
+})
+
+hl.window_rule({
+    match={
+        title="GL.*",
+    },
+    float =true,
     center = true,
 })
