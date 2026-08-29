@@ -54,6 +54,8 @@ hl.config({
 hl.on("hyprland.start", function ()
   hl.exec_cmd('exec dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY &')
   hl.exec_cmd('hyprpaper')
+  hl.exec_cmd('gsettings set org.gnome.desktop.interface gtk-theme "YOUR_DARK_GTK3_THEME"')
+  hl.exec_cmd('gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"')
 end)
 
 
@@ -64,11 +66,14 @@ end)
 -- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Environment-variables/
 
 hl.env("XCURSOR_SIZE", "24")
+hl.env("XDG_SESSION_TYPE", "wayland")
 hl.env("HYPRCURSOR_SIZE", "24")
 hl.env("MOZ_ENABLE_WAYLAND", "1")
 hl.env("GDK_SCALE", "1.25")
 hl.env("QT_SCALE_FACTOR", "1.25")
 hl.env("QT_AUTO_SCREEN_SCALE_FACTOR", "1")
+hl.env("QT_QPA_PLATFORMTHEME", "qt6ct")
+hl.env("GTK_THEME", "Adwaita:dark")
 
 -----------------------
 ---- LOOK AND FEEL ----
@@ -308,5 +313,14 @@ hl.window_rule({
         title="GL.*",
     },
     float =true,
+    center = true,
+})
+
+hl.window_rule({
+    match = {
+        class="kicad",
+        title="Footprint Chooser.*",
+    },
+    size = {"monitor_w * 0.8", "monitor_h * 0.8"},
     center = true,
 })

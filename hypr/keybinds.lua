@@ -18,6 +18,8 @@ hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
 
 hl.bind(mainMod .. " + F", hl.dsp.exec_cmd("firefox"))
 hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("spotify-launcher"))
+hl.bind("Print", hl.dsp.exec_cmd('grim -g "$(slurp)" - | swappy -f -'))
+hl.bind(mainMod .. " + Print", hl.dsp.exec_cmd('grim -g "$(slurp -d)" - | wl-copy'))
 
 -- Move focus
 bind_multiple({
