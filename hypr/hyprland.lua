@@ -54,6 +54,7 @@ hl.config({
 hl.on("hyprland.start", function ()
   hl.exec_cmd('exec dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY &')
   hl.exec_cmd('hyprpaper')
+  hl.exec_cmd('quickshell')
   hl.exec_cmd('gsettings set org.gnome.desktop.interface gtk-theme "YOUR_DARK_GTK3_THEME"')
   hl.exec_cmd('gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"')
 end)
@@ -69,8 +70,8 @@ hl.env("XCURSOR_SIZE", "24")
 hl.env("XDG_SESSION_TYPE", "wayland")
 hl.env("HYPRCURSOR_SIZE", "24")
 hl.env("MOZ_ENABLE_WAYLAND", "1")
-hl.env("GDK_SCALE", "1.25")
-hl.env("QT_SCALE_FACTOR", "1.25")
+-- hl.env("GDK_SCALE", "1.25")
+-- hl.env("QT_SCALE_FACTOR", "1.25")
 hl.env("QT_AUTO_SCREEN_SCALE_FACTOR", "1")
 hl.env("QT_QPA_PLATFORMTHEME", "qt6ct")
 hl.env("GTK_THEME", "Adwaita:dark")
@@ -82,10 +83,10 @@ hl.env("GTK_THEME", "Adwaita:dark")
 -- Refer to https://wiki.hypr.land/Configuring/Basics/Variables/
 hl.config({
     general = {
-        gaps_in  = 5,
-        gaps_out = 10,
+        gaps_in  = 2,
+        gaps_out = 4,
 
-        border_size = 3,
+        border_size = 1,
 
         col = {
             active_border   = { colors = {"rgba(00FF26ee)", "rgba(00FFFFee)"}, angle = 45 },
@@ -102,7 +103,7 @@ hl.config({
     },
 
     decoration = {
-        rounding       = 10,
+        rounding       = 5,
         rounding_power = 2,
 
         -- Change transparency of focused and unfocused windows
